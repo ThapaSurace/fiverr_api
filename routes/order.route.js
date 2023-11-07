@@ -18,7 +18,7 @@ const router = express.Router();
 
 // router.post("/order/:gigId",verifyToken,createOrder)
 
-router.get("/orders", getOrder);
+router.get("/orders", verifyToken, getOrder);
 
 router.get("/order/:id", verifyToken, getSingleOrder);
 
