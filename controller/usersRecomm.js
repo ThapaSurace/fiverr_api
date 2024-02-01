@@ -78,39 +78,3 @@ export const getUserRecomm = async (req, res, next) => {
 
 
 
-// export const getUserRecomm = async (req, res, next) => {
-//   const userId = req.params.userId;
-//   try {
-//     const similarUsersWithScores = await calculateUserSimilarity(userId);
-//     const userOrders = await Order.find({ buyerId: userId });
-//     const purchasedCategories = userOrders.map(order => order.cat);
-//     const userOrderedGigIds = userOrders.map(order => order.gigId);
-
-//     const recommendedGigs = [];
-//     const uniqueGigIds = new Set(); // Use a Set to store unique gig IDs
-
-//     for (const userScore of similarUsersWithScores) {
-//       const { userId: similarUserId, similarity } = userScore;
-//       const userGigs = await Order.find({
-//         buyerId: similarUserId,
-//         cat: { $in: purchasedCategories },
-//         gigId: { $nin: userOrderedGigIds },
-//       });
-
-//       userGigs.forEach(gig => {
-//         // Check if the gig ID is unique before adding it to recommendedGigs
-//         if (!uniqueGigIds.has(gig.gigId)) {
-//           // Include the similarity score in the recommended gig object
-//           recommendedGigs.push({ gigId: gig.gigId, similarity });
-//           uniqueGigIds.add(gig.gigId); // Add the gig ID to the Set
-//         }
-//       });
-//     }
-
-//     recommendedGigs.sort((a, b) => b.similarity - a.similarity);
-
-//     res.send(recommendedGigs);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
