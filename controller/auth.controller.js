@@ -57,8 +57,6 @@ export const login = async (req, res, next) => {
     const matchPassword = bcrypt.compareSync(req.body.password, user.password);
     if (!matchPassword) return next(createError(400, "Password doesnt match!"));
 
-    if(!user.verified) return next(createError(400,"Email is not verified!!"))
-
     const token = jwt.sign(
       {
         id: user._id,
